@@ -27,6 +27,11 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
+// Route untuk menampilkan form pemesanan
+Route::get('/pesan', function () {
+    return view('pesan');
+})->name('pesan');
+
 use App\Http\Controllers\adminController;
 // Route untuk Admin Dashboard
 Route::get('/admin/dashboard', [adminController::class, 'dashboard'])->name('admin.dashboard');
