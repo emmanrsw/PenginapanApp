@@ -19,6 +19,10 @@ Route::get('/facilities', function () {
     return view('fasilitas');
 })->name('facilities');
 
+Route::get('/location', function () {
+    return view('location');
+})->name('location');
+
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
