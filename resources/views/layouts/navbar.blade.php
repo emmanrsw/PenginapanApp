@@ -77,6 +77,9 @@
                     <a class="nav-link" href="{{ route('about') }}">Tentang</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('room') }}">Kamar</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('facilities') }}">Fasilitas</a>
                 </li>
                 <li class="nav-item">

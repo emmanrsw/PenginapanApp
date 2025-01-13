@@ -24,7 +24,6 @@ Route::get('/contact', function () {
 })->name('contact');
 
 use App\Http\Controllers\adminController;
-
 // Route untuk Admin Dashboard
 Route::get('/admin/dashboard', [adminController::class, 'dashboard'])->name('admin.dashboard');
 
@@ -36,3 +35,7 @@ Route::get('/admin/orders', [adminController::class, 'orders'])->name('admin.ord
 
 // Route untuk Ulasan
 Route::get('/admin/reviews', [adminController::class, 'reviews'])->name('admin.reviews');
+
+use App\Http\Controllers\kamarController;
+// Route untuk Kelola Kamar
+Route::get('/room', [kamarController::class, 'view'])->name('room');
