@@ -32,19 +32,40 @@ Route::get('/pesan', function () {
     return view('pesan');
 })->name('pesan');
 
+
+
+
+
 use App\Http\Controllers\adminController;
+
+// ------------------------------------------------------------------------ view admin
 // Route untuk Admin Dashboard
 Route::get('/admin/dashboard', [adminController::class, 'dashboard'])->name('admin.dashboard');
 
-// Route untuk Kelola Kamar
-Route::get('/admin/rooms', [adminController::class, 'rooms'])->name('admin.rooms');
-
-// Route untuk Pesanan
+// -------------------SEMENTARA BIAR ADA ROUTE DULU
+// // Route untuk Pesanan
 Route::get('/admin/orders', [adminController::class, 'orders'])->name('admin.orders');
-
 // Route untuk Ulasan
 Route::get('/admin/reviews', [adminController::class, 'reviews'])->name('admin.reviews');
+// -----------------------------SAMPE ITU, SAMA
+
 
 use App\Http\Controllers\kamarController;
-// Route untuk Kelola Kamar
-Route::get('/room', [kamarController::class, 'view'])->name('room');
+// ----------------------YANG INI UDH BISA 
+// Daftar kamar
+Route::get('/admin/rooms', [kamarController::class, 'index'])->name('admin.daftarKamar');
+// Halaman tambah kamar
+Route::get('/rooms/create', [kamarController::class, 'create'])->name('kelolaKamar');
+Route::post('/admin/rooms', [kamarController::class, 'index'])->name('admin.daftarKamar');
+// Simpan kamar baru
+Route::post('/admin/orders', [kamarController::class, 'store'])->name('admin.store');
+// Hapus kamar
+Route::delete('/rooms/{idKamar}', [kamarController::class, 'destroy'])->name('rooms.destroy');
+// ------------------------------------------------------- SAMPE SITU UDAH BENER
+
+
+// -------------------------INI BELUM TAPI JANGAN DIHAPUS DULU YA
+// Halaman edit kamar
+Route::get('/rooms/{idKamar}/edit', [kamarController::class, 'edit'])->name('rooms.edit');
+// Update data kamar
+Route::put('/rooms/{idKamar}', [kamarController::class, 'update'])->name('rooms.update');

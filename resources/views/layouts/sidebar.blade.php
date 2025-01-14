@@ -13,7 +13,7 @@
             <div class="sidebar-heading text-center py-4">Admin Homestay</div>
             <div class="list-group list-group-flush">
                 <a href="{{ route('admin.dashboard') }}" class="list-group-item list-group-item-action bg-dark text-white">Dashboard</a>
-                <a href="{{ route('admin.rooms') }}" class="list-group-item list-group-item-action bg-dark text-white">Kelola Kamar</a>
+                <a href="{{ route('admin.daftarKamar') }}" class="list-group-item list-group-item-action bg-dark text-white">Daftar Kamar</a>
                 <a href="{{ route('admin.orders') }}" class="list-group-item list-group-item-action bg-dark text-white">Pesanan</a>
                 <a href="{{ route('admin.reviews') }}" class="list-group-item list-group-item-action bg-dark text-white">Ulasan</a>
             </div>

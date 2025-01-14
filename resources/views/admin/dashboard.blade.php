@@ -1,7 +1,6 @@
-@extends('layouts.admin')
+@extends('layouts.sidebar')
 
 @section('content')
-<!-- Admin Dashboard Section -->
 <div class="container-fluid mt-4">
     <div class="row">
         <!-- Stats Overview -->
