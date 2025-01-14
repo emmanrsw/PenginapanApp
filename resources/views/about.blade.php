@@ -10,21 +10,30 @@
     }
 
     /* Hero Section */
-    /* Hero Section */
     .hero-section {
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 244, 124, 0.57)),
+        background: linear-gradient(to right, rgba(253, 246, 227, 0.9) 28%, rgba(255, 255, 255, 0) 100%),
             url('image/tentang6.jpg') no-repeat center center/cover;
         color: #07617D;
         padding: 120px 20px;
         text-align: center;
         position: relative;
         border-radius: 20px;
-        /* Menambahkan rounding pada sudut */
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        /* Menambahkan bayangan untuk kesan lebih lembut */
         overflow: hidden;
-        /* Agar gambar tidak meluber keluar */
     }
+
+    .hero-section:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.3);
+        /* Transparansi gelap untuk meningkatkan kontras */
+        z-index: -1;
+    }
+
 
     .hero-section h1 {
         font-size: 3.8rem;
@@ -44,7 +53,6 @@
         margin-right: auto;
     }
 
-    /* About Content */
     /* About Content */
     .about-content {
         margin: 70px auto;
@@ -79,10 +87,12 @@
     }
 
     .about-content p {
-        font-size: 1.1rem;
-        line-height: 1.7;
-        margin-bottom: 20px;
-        /* Mengurangi jarak antar paragraf untuk kesan lebih padat */
+        font-size: 1.2rem;
+        /* Ukuran font sedikit lebih besar */
+        line-height: 1.8;
+        /* Jarak antar baris lebih lebar */
+        margin-bottom: 25px;
+        /* Memberikan spasi lebih banyak antar paragraf */
         color: #666;
         font-weight: 300;
         transition: opacity 0.3s ease;
@@ -90,6 +100,7 @@
         margin-left: auto;
         margin-right: auto;
     }
+
 
     .about-content h3 {
         font-size: 1.8rem;
@@ -119,20 +130,25 @@
     }
 
     .button-container a {
-        padding: 15px 30px;
-        font-size: 1.1rem;
+        padding: 18px 35px;
+        /* Tombol lebih besar */
+        font-size: 1.2rem;
+        /* Ukuran font lebih besar */
         color: #fff;
         background-color: #07617D;
         border-radius: 30px;
         text-decoration: none;
-        transition: transform 0.3s ease, background-color 0.3s ease;
+        transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
         box-shadow: 0 8px 25px rgba(0, 123, 255, 0.2);
     }
 
     .button-container a:hover {
         background-color: #054D5F;
         transform: translateY(-5px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+        /* Menambahkan bayangan saat hover */
     }
+
 
     /* Image Section */
     .image-section {
@@ -151,6 +167,7 @@
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         object-fit: cover;
+        /* Menjaga agar gambar tidak terdistorsi */
     }
 
     .image-section img:hover {
@@ -172,7 +189,8 @@
     .image-section {
         opacity: 0;
         transform: translateY(40px);
-        animation: fadeInUp 1s forwards;
+        animation: fadeInUp 1s ease-out forwards;
+        /* Menambahkan ease-out untuk animasi yang lebih halus */
     }
 
     .hero-section {
@@ -191,10 +209,47 @@
         animation-delay: 0.8s;
     }
 
+    /* Style for Icons */
+    ul li i {
+        margin-right: 10px;
+        color: #07617D;
+        font-size: 1.5rem;
+    }
+
+
     @keyframes fadeInUp {
         to {
             opacity: 1;
             transform: translateY(0);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .image-section {
+            grid-template-columns: 1fr;
+            /* Satu kolom pada layar kecil */
+            padding: 0;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            /* Mengurangi ukuran font pada layar kecil */
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            /* Menyesuaikan ukuran font pada layar kecil */
+        }
+
+        .about-content h2 {
+            font-size: 2.4rem;
+            /* Mengurangi ukuran heading pada layar kecil */
+        }
+
+        .button-container a {
+            padding: 12px 25px;
+            /* Menyesuaikan ukuran tombol pada layar kecil */
+            font-size: 1rem;
         }
     }
 </style>
@@ -226,10 +281,12 @@
 
     <h2>Misi Kami</h2>
     <ul>
-        <li>Menyediakan layanan yang ramah dan profesional.</li>
-        <li>Menjaga kebersihan dan kenyamanan setiap ruangan.</li>
-        <li>Memberikan pengalaman menginap yang menyenangkan bagi setiap tamu.</li>
+        <li><i class="fas fa-thumbs-up"></i> Menyediakan layanan yang ramah dan profesional.</li>
+        <li><i class="fas fa-broom"></i> Menjaga kebersihan dan kenyamanan setiap ruangan.</li>
+        <li><i class="fas fa-smile"></i> Memberikan pengalaman menginap yang menyenangkan bagi setiap tamu.</li>
     </ul>
+
+
 </div>
 
 <!-- Call to Action -->
