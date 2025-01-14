@@ -23,9 +23,9 @@ Route::get('/location', function () {
     return view('location');
 })->name('location');
 
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
+// Route::get('/contact', function () {
+//     return view('contact');
+// })->name('contact');
 
 // Route untuk menampilkan form pemesanan
 Route::get('/pesan', function () {
@@ -73,3 +73,8 @@ Route::get('/room', [kamarController::class, 'view'])->name('rooms.view');
 Route::get('/rooms/{idKamar}/edit', [kamarController::class, 'edit'])->name('rooms.edit');
 // Update data kamar
 Route::put('/rooms/{idKamar}', [kamarController::class, 'update'])->name('rooms.update');
+
+
+use App\Http\Controllers\karyawanController;
+Route::get('/contact', [karyawanController::class, 'index'])->name('contact');
+// Route::post('/contact/send', [karyawanController::class, 'sendMessage'])->name('contact.send');

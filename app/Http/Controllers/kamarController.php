@@ -7,6 +7,7 @@ use App\Models\Kamar;
 
 class kamarController extends Controller
 {
+    //=============================== ADMIN ===============================
     // Menampilkan daftar kamar
     public function index()
     {
@@ -94,4 +95,6 @@ class kamarController extends Controller
         // Redirect ke halaman daftar kamar
         return redirect()->route('rooms')->with('success', 'Kamar berhasil diperbarui.');
     }
+
+    // =============================== USER ===============================
 }
