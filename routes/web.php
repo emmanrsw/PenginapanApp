@@ -51,6 +51,7 @@ Route::get('/admin/reviews', [adminController::class, 'reviews'])->name('admin.r
 
 
 use App\Http\Controllers\kamarController;
+// BAGIAN ADMIN
 // ----------------------YANG INI UDH BISA 
 // Daftar kamar
 Route::get('/admin/rooms', [kamarController::class, 'index'])->name('admin.daftarKamar');
@@ -61,6 +62,9 @@ Route::post('/admin/rooms', [kamarController::class, 'index'])->name('admin.daft
 Route::post('/admin/orders', [kamarController::class, 'store'])->name('admin.store');
 // Hapus kamar
 Route::delete('/rooms/{idKamar}', [kamarController::class, 'destroy'])->name('rooms.destroy');
+
+// BAGIAN USER
+Route::get('/room', [kamarController::class, 'view'])->name('rooms.view');
 // ------------------------------------------------------- SAMPE SITU UDAH BENER
 
 

@@ -14,56 +14,83 @@
 
     /* Navbar */
     .navbar {
-        background-color: #FDF6E3 !important;
-        /* Primary: Navy blue */
-        padding: 10px 20px !important;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        background-color: #FDF6E3 !important; /* Warna latar belakang navbar */
+        padding: 5px 20px !important; /* Mengurangi padding navbar */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         margin-bottom: 0;
     }
 
+    .navbar-brand img {
+        width: 190px; /* Ukuran gambar logo disesuaikan lebih kecil */
+        height: auto;
+    }
+
     .navbar-brand {
-        color: #07617D !important;
-        /* Putih untuk teks brand */
+        color: #07617D !important; /* Warna brand */
         font-weight: bold !important;
-        font-size: 1.5rem !important;
+        font-size: 1.6rem !important; /* Mengurangi ukuran font pada brand */
         text-transform: uppercase !important;
+        letter-spacing: 1px !important; /* Menambah jarak huruf */
+        transition: color 0.3s ease;
+    }
+
+    .navbar-brand:hover {
+        color: #054D5F !important; /* Warna saat hover pada brand */
     }
 
     .navbar-toggler {
-        border-color: #FFFFFF !important;
+        border-color: #07617D !important; /* Menyesuaikan border */
     }
 
     .navbar-toggler-icon {
-        background-color: #FFFFFF !important;
-        /* Ikon toggle putih */
+        background-color: #07617D !important; /* Ikon toggle navbar */
         border-radius: 5px !important;
     }
 
     .navbar-nav .nav-link {
-        color: #07617D !important;
-        /* Putih untuk link */
+        color: #07617D !important; /* Warna link navbar */
         font-weight: 500 !important;
-        margin-right: 15px !important;
+        margin-right: 15px !important; /* Mengurangi margin antar link */
         text-transform: capitalize !important;
-        transition: color 0.3s ease !important;
+        transition: color 0.3s ease, transform 0.3s ease;
     }
 
     .navbar-nav .nav-link.active,
     .navbar-nav .nav-link:hover {
-        color: #054D5F !important;
-        /* Accent: Merah bata untuk link aktif/hover */
+        color: #054D5F !important; /* Warna saat hover dan link aktif */
         font-weight: bold !important;
+        transform: translateY(-3px); /* Efek sedikit mengangkat saat hover */
     }
 
     .navbar-collapse {
-        justify-content: flex-end !important;
-        /* Agar link ada di kanan */
+        justify-content: flex-end !important; /* Menata link navbar ke kanan */
+    }
+
+    /* Navbar pada mode mobile */
+    @media (max-width: 991px) {
+        .navbar-collapse {
+            text-align: center !important;
+        }
+
+        .navbar-nav .nav-item {
+            margin-bottom: 10px !important; /* Mengurangi jarak antar item */
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem !important; /* Mengurangi ukuran font pada mobile */
+        }
+
+        .navbar-brand img {
+            width: 100px; /* Mengurangi ukuran logo pada mobile */
+        }
     }
 </style>
 
 <body>
-    <nav class="navbar navbar-expand-lg ">
-        <a class="navbar-brand" href="{{ route('home') }}">Homestay Kami</a>
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="{{ route('home') }}">
+            <img src="image/logo.png" alt="Homestay Kami Logo">
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -77,7 +104,7 @@
                     <a class="nav-link" href="{{ route('about') }}">Tentang</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('room') }}">Kamar</a>
+                    <a class="nav-link" href="{{ route('rooms.view') }}">Kamar</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('location') }}">Lokasi</a>

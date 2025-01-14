@@ -1,152 +1,171 @@
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>
-        HumaStay
+        Expert in Making the Best Residence
     </title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&amp;family=Roboto:wght@400;700&amp;display=swap"
+        rel="stylesheet" />
     <style>
-        body,
-        html {
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #fdf6e3;
             margin: 0;
             padding: 0;
-            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .header {
-            position: relative;
             text-align: center;
-            color: white;
+            margin-bottom: 20px;
         }
 
-        .header img {
-            width: 100%;
-            height: auto;
-        }
-
-        .header .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(255, 255, 255, 0.7);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .header .overlay h1 {
-            color: #005580;
-            font-size: 3em;
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: #004d40;
             margin: 0;
         }
 
-        .header .overlay p {
-            color: #333;
-            font-size: 1.2em;
-            margin: 20px 0 0 0;
-            max-width: 600px;
-            text-align: center;
+        .header h2 {
+            font-size: 28px;
+            color: #00796b;
+            margin: 10px 0;
         }
 
-        .navbar {
-            position: absolute;
-            top: 0;
-            width: 100%;
+        .content {
             display: flex;
-            justify-content: flex-end;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.7);
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        .navbar a {
-            color: #005580;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 1em;
+        .content .text {
+            flex: 1;
+            min-width: 300px;
         }
 
-        .logo {
+        .content .text p {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .content .image {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+
+        .content .image img {
+            width: 100%;
+            border-radius: 15px;
+        }
+
+        .content .image .overlay {
             position: absolute;
             top: 20px;
-            left: 20px;
+            right: 20px;
+            background-color: #004d40;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        .testimonial {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .testimonial p {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .testimonial .author {
             display: flex;
+            justify-content: space-between;
             align-items: center;
+            margin-top: 20px;
         }
 
-        .logo img {
-            height: 50px;
-            margin-right: 10px;
-        }
-
-        .logo span {
-            color: #005580;
-            font-size: 1.5em;
+        .testimonial .author .name {
             font-weight: bold;
         }
 
+        .testimonial .author .position {
+            color: #00796b;
+        }
+
         @media (max-width: 768px) {
-            .header .overlay h1 {
-                font-size: 2em;
-            }
-
-            .header .overlay p {
-                font-size: 1em;
-                padding: 0 20px;
-            }
-
-            .navbar {
+            .content {
                 flex-direction: column;
-                align-items: center;
-            }
-
-            .navbar a {
-                margin: 10px 0;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="header">
-        <img alt="A scenic view of a resort with wooden walkways over water and traditional-style buildings"
-            src="https://placehold.co/1280x720" />
-        <div class="overlay">
-            <div class="logo">
-                <img alt="HumaStay logo" src="https://placehold.co/50x50?text=Logo" />
-                <span>
-                    HumaStay
+    <div class="container">
+        <div class="header">
+            <h1>
+                We are Expert in
+            </h1>
+            <h2>
+                Making the Best Residence
+            </h2>
+        </div>
+        <div class="content">
+            <div class="text">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur convallis est nisi, sit amet
+                    pharetra lorem vestibulum et. Praesent interdum et mauris in viverra.
+                </p>
+            </div>
+            <div class="image">
+                <img alt="A beautiful modern house with a well-maintained lawn and a clear sky in the background"
+                    src="https://placehold.co/600x400" />
+                <div class="overlay">
+                    <p>
+                        Experienced
+                        <br />
+                        Over 10 Years
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial">
+            <p>
+                “We are the best Home Stay for you”
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur convallis est nisi, sit amet pharetra
+                lorem vestibulum et.
+            </p>
+            <div class="author">
+                <span class="name">
+                    Woody Woodpecker
+                </span>
+                <span class="position">
+                    CEO of HumaStay
                 </span>
             </div>
-            <div class="navbar">
-                <a href="#">
-                    Home
-                </a>
-                <a href="#">
-                    About
-                </a>
-                <a href="#">
-                    Room
-                </a>
-                <a href="#">
-                    Facility
-                </a>
-                <a href="#">
-                    Contact
-                </a>
-            </div>
-            <h1>
-                Find your perfect place to stay
-            </h1>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Elementum nisi aliquet volutpat pellentesque
-                volutpat est. Sapien in etiam vitae nibh nunc mattis imperdiet sed nullam.
-            </p>
         </div>
     </div>
 </body>
