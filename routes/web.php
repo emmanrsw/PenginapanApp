@@ -23,6 +23,10 @@ Route::get('/location', function () {
     return view('location');
 })->name('location');
 
+Route::get('/lihatJdwl', function () {
+    return view('lihatJdwl');
+})->name('lihatJdwl');
+
 // Route::get('/contact', function () {
 //     return view('contact');
 // })->name('contact');

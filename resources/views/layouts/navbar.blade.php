@@ -132,7 +132,7 @@
                     <a class="nav-link" href="{{ route('rooms.view') }}">Kamar</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Lihat Jadwal</a>
+                    <a class="nav-link" href="{{ route('lihatJdwl') }}">Lihat Jadwal</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('location') }}">Lokasi</a>
