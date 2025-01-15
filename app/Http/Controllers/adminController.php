@@ -26,4 +26,10 @@ class AdminController extends Controller
     {
         return view('admin.reviews');
     }
+
+    // Menampilkan halaman laporan
+    public function laporan()
+    {
+        return view('admin.laporan');
+    }
 }

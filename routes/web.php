@@ -63,6 +63,10 @@ Route::post('/admin/orders', [kamarController::class, 'store'])->name('admin.sto
 // Hapus kamar
 Route::delete('/rooms/{idKamar}', [kamarController::class, 'destroy'])->name('rooms.destroy');
 
+// LAPORAN
+Route::get('/admin/laporan', [adminController::class, 'laporan'])->name('admin.laporan');
+
+
 // BAGIAN USER
 Route::get('/room', [kamarController::class, 'view'])->name('rooms.view');
 // ------------------------------------------------------- SAMPE SITU UDAH BENER

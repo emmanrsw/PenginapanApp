@@ -117,6 +117,10 @@
                    class="list-group-item list-group-item-action bg-dark text-white {{ request()->routeIs('admin.reviews') ? 'active' : '' }}">
                     Ulasan
                 </a>
+                <a href="{{ route('admin.laporan') }}" 
+                   class="list-group-item list-group-item-action bg-dark text-white {{ request()->routeIs('admin.laporan') ? 'active' : '' }}">
+                    Laporan
+                </a>
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
