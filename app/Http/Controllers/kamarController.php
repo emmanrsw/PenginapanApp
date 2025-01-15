@@ -151,4 +151,18 @@ class kamarController extends Controller
         // Kirim data kamar ke view 'listkamar'
         return view('listKamar', compact('rooms'));
     }
+
+
+
+// tampilannya jadi jelek
+    public function showAvailableRooms(Request $request)
+    {
+        $date = $request->input('date');
+        $availableRooms = Kamar::where('statusKamar', 'Tersedia')->get();
+
+        return view('listKamar', [
+            'rooms' => $availableRooms,
+            'selectedDate' => $date,
+        ]);
+    }
 }

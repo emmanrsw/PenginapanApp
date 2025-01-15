@@ -147,9 +147,7 @@
 
     .room-footer .room-book-btn {
         font-size: 12px;
-        /* Memperkecil ukuran font */
         padding: 5px 15px;
-        /* Mengurangi padding tombol */
         background-color: #007BFF;
         color: white;
         border: none;
@@ -167,7 +165,6 @@
         color: #777;
         margin: 0;
         text-align: right;
-        /* Agar teks rata kanan */
     }
 
     /* Filter Buttons */
@@ -216,46 +213,59 @@
 <div class="room-section">
     <h2 class="title">Our Homestay Rooms</h2>
 
-    <!-- Filter Buttons -->
-    <div class="filter-buttons">
-        <button class="filter-btn active">All</button>
-        <button class="filter-btn">Reguler</button>
-        <button class="filter-btn">Paket</button>
-    </div>
+    <!-- Date Selection Form -->
+    <form action="{{ route('rooms.available') }}" method="GET">
+        <label for="check_in_date">Tanggal Check-In:</label>
+        <input type="date" id="check_in_date" name="check_in_date" required>
+
+        <label for="check_in_time">Jam Check-In:</label>
+        <input type="time" id="check_in_time" name="check_in_time" required>
+
+        <label for="check_out_date">Tanggal Check-Out:</label>
+        <input type="date" id="check_out_date" name="check_out_date" required>
+
+        <label for="check_out_time">Jam Check-Out:</label>
+        <input type="time" id="check_out_time" name="check_out_time" required>
+
+        <button type="submit">Cari</button>
+    </form>
+
 
     <!-- Room Cards -->
     <div class="room-cards">
-        @foreach ($rooms as $room)
-            <div class="room-card">
-                <img src="{{ asset('images/kamar/' . $room->gambarKamar) }}" alt="Room Image" class="room-image">
-                <div class="room-info">
-                    <div class="room-header">
-                        <h3 class="room-title">{{ $room->namaKamar }}</h3>
-                        <div class="room-status">
-                            @if ($room->statusKamar == 'Tersedia')
-                                <span class="badge bg-success">Tersedia</span>
-                            @elseif ($room->statusKamar == 'Terisi')
-                                <span class="badge bg-secondary">Tidak Tersedia</span>
-                            @else
-                                <span class="badge bg-secondary">Sedang Perbaikan</span>
-                            @endif
-                        </div>
+        @forelse ($rooms as $room)
+        <div class="room-card">
+            <img src="{{ asset('images/kamar/' . $room->gambarKamar) }}" alt="Room Image" class="room-image">
+            <div class="room-info">
+                <div class="room-header">
+                    <h3 class="room-title">{{ $room->namaKamar }}</h3>
+                    <div class="room-status">
+                        @if ($room->statusKamar == 'Tersedia')
+                        <span class="badge bg-success">Tersedia</span>
+                        @elseif ($room->statusKamar == 'Terisi')
+                        <span class="badge bg-secondary">Sedang Terisi</span>
+                        @else
+                        <span class="badge bg-secondary">Sedang Perbaikan</span>
+                        @endif
                     </div>
-                    <div class="room-details">
-                        <div>🛏️ {{ $room->jmlhKasur }} Kasur</div>
-                        <div>❄️ {{ $room->ac }} AC</div>
-                        <div>🚿 {{ $room->jmlhKamarMandi }} Kamar Mandi</div>
-                        <div>👥 {{ $room->kapasitasKamar }} Orang</div>
-                    </div>
-                    <div class="room-footer">
-                        <button class="room-book-btn">Pesan</button>
-                        <div class="room-update">terakhir update:
-                            {{ \Carbon\Carbon::parse($room->updated_at)->format('d/m/Y') }}
-                        </div>
+                </div>
+                <div class="room-details">
+                    <div>🛏️ {{ $room->jmlhKasur }} Kasur</div>
+                    <div>❄️ {{ $room->ac }} AC</div>
+                    <div>🚿 {{ $room->jmlhKamarMandi }} Kamar Mandi</div>
+                    <div>👥 {{ $room->kapasitasKamar }} Orang</div>
+                </div>
+                <div class="room-footer">
+                    <button class="room-book-btn">Pesan</button>
+                    <div class="room-update">terakhir update:
+                        {{ \Carbon\Carbon::parse($room->updated_at)->format('d/m/Y') }}
                     </div>
                 </div>
             </div>
-        @endforeach
+        </div>
+        @empty
+        <p>No rooms available for the selected date.</p>
+        @endforelse
     </div>
 </div>
 @endsection

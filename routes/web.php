@@ -66,6 +66,10 @@ Route::delete('/rooms/{idKamar}', [kamarController::class, 'destroy'])->name('ro
 // LAPORAN
 Route::get('/admin/laporan', [adminController::class, 'laporan'])->name('admin.laporan');
 
+// tampilan list kamar 
+Route::get('/rooms/available', [kamarController::class, 'showAvailableRooms'])->name('rooms.available');
+
+
 
 // BAGIAN USER
 Route::get('/room', [kamarController::class, 'view'])->name('rooms.view');
