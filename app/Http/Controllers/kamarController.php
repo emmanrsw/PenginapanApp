@@ -70,7 +70,7 @@ class kamarController extends Controller
     }
 
 
-// INI BELUM
+    // INI BELUM (udah lala benerin, cek ya)
     // Menampilkan form edit kamar
     public function edit($idKamar)
     {
@@ -85,16 +85,70 @@ class kamarController extends Controller
         $request->validate([
             'namaKamar' => 'required|string|max:255',
             'hargaKamar' => 'required|numeric',
+            'jmlhKasur' => 'required|integer',
+            'jmlhKamarMandi' => 'required|integer',
+            'ac' => 'required|boolean',
             'statusKamar' => 'required|string',
+            'kapasitasKamar' => 'required|integer',
+            'gambarKamar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Update data kamar
+        // Ambil data kamar yang akan diperbarui
         $room = Kamar::findOrFail($idKamar);
-        $room->update($request->all());
+
+        // Tangani unggahan gambar baru jika ada
+        if ($request->hasFile('gambarKamar')) {
+            $file = $request->file('gambarKamar');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('images/kamar'), $filename);
+
+            // Hapus gambar lama jika ada
+            if ($room->gambarKamar && file_exists(public_path('images/kamar/' . $room->gambarKamar))) {
+                unlink(public_path('images/kamar/' . $room->gambarKamar));
+            }
+
+            $room->gambarKamar = $filename;
+        }
+
+        // Perbarui data lainnya
+        $room->update([
+            'namaKamar' => $request->namaKamar,
+            'hargaKamar' => $request->hargaKamar,
+            'jmlhKasur' => $request->jmlhKasur,
+            'jmlhKamarMandi' => $request->jmlhKamarMandi,
+            'ac' => $request->ac,
+            'statusKamar' => $request->statusKamar,
+            'kapasitasKamar' => $request->kapasitasKamar,
+        ]);
 
         // Redirect ke halaman daftar kamar
-        return redirect()->route('rooms')->with('success', 'Kamar berhasil diperbarui.');
+        return redirect()->route('admin.daftarKamar')->with('success', 'Kamar berhasil diperbarui.');
     }
 
+    // // Memperbarui data kamar
+    // public function update(Request $request, $idKamar)
+    // {
+    //     // Validasi input
+    //     $request->validate([
+    //         'namaKamar' => 'required|string|max:255',
+    //         'hargaKamar' => 'required|numeric',
+    //         'statusKamar' => 'required|string',
+    //     ]);
+
+    //     // Update data kamar
+    //     $room = Kamar::findOrFail($idKamar);
+    //     $room->update($request->all());
+
+    //     // Redirect ke halaman daftar kamar
+    //     return redirect()->route('rooms')->with('success', 'Kamar berhasil diperbarui.');
+    // }
+
     // =============================== USER ===============================
+    public function view (){
+        // Ambil semua kamar dari database
+        $rooms = Kamar::all();
+
+        // Kirim data kamar ke view 'listkamar'
+        return view('listKamar', compact('rooms'));
+    }
 }

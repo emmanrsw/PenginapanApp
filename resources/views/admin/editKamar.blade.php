@@ -43,7 +43,8 @@
         font-weight: bold;
     }
 
-    .form-control, .form-select {
+    .form-control,
+    .form-select {
         border-radius: 10px;
     }
 
@@ -60,51 +61,63 @@
 
     <!-- Tambah Kamar -->
     <div class="card mb-4">
-        <div class="card-header">Tambah Kamar</div>
+        <div class="card-header">Edit Kamar</div>
         <div class="card-body">
-            <form action="{{ route('admin.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('rooms.update', $room->idKamar) }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
+
                 <div class="mb-3">
                     <label for="roomName" class="form-label">Nama Kamar</label>
-                    <input type="text" class="form-control" id="roomName" name="namaKamar" required>
+                    <input type="text" class="form-control" id="roomName" name="namaKamar"
+                        value="{{ $room->namaKamar }}" required>
                 </div>
                 <div class="mb-3">
                     <label for="roomPrice" class="form-label">Harga per Malam</label>
-                    <input type="number" class="form-control" id="roomPrice" name="hargaKamar" required>
+                    <input type="number" class="form-control" id="roomPrice" name="hargaKamar"
+                        value="{{ $room->hargaKamar }}" required>
                 </div>
                 <div class="mb-3">
                     <label for="roomBeds" class="form-label">Jumlah Kasur</label>
-                    <input type="number" class="form-control" id="roomBeds" name="jmlhKasur" required>
+                    <input type="number" class="form-control" id="roomBeds" name="jmlhKasur"
+                        value="{{ $room->jmlhKasur }}" required>
                 </div>
                 <div class="mb-3">
                     <label for="roomBathrooms" class="form-label">Jumlah Kamar Mandi</label>
-                    <input type="number" class="form-control" id="roomBathrooms" name="jmlhKamarMandi" required>
+                    <input type="number" class="form-control" id="roomBathrooms" name="jmlhKamarMandi"
+                        value="{{ $room->jmlhKamarMandi }}" required>
                 </div>
                 <div class="mb-3">
                     <label for="roomAC" class="form-label">AC</label>
                     <select class="form-select" id="roomAC" name="ac" required>
-                        <option value="1">Ada</option>
-                        <option value="0">Tidak Ada</option>
+                        <option value="1" {{ $room->ac ? 'selected' : '' }}>Ada</option>
+                        <option value="0" {{ !$room->ac ? 'selected' : '' }}>Tidak Ada</option>
                     </select>
                 </div>
                 <div class="mb-3">
                     <label for="roomCapacity" class="form-label">Kapasitas Kamar</label>
-                    <input type="number" class="form-control" id="roomCapacity" name="kapasitasKamar" required>
+                    <input type="number" class="form-control" id="roomCapacity" name="kapasitasKamar"
+                        value="{{ $room->kapasitasKamar }}" required>
                 </div>
                 <div class="mb-3">
                     <label for="roomStatus" class="form-label">Status Kamar</label>
                     <select class="form-select" id="roomStatus" name="statusKamar" required>
-                        <option value="Tersedia">Tersedia</option>
-                        <option value="Terisi">Terisi</option>
-                        <option value="Perbaikan">Perbaikan</option>
+                        <option value="Tersedia" {{ $room->statusKamar == 'Tersedia' ? 'selected' : '' }}>Tersedia
+                        </option>
+                        <option value="Terisi" {{ $room->statusKamar == 'Terisi' ? 'selected' : '' }}>Terisi</option>
+                        <option value="Perbaikan" {{ $room->statusKamar == 'Perbaikan' ? 'selected' : '' }}>Perbaikan</option>
                     </select>
                 </div>
                 <div class="mb-3">
                     <label for="roomImage" class="form-label">Gambar Kamar</label>
                     <input type="file" class="form-control" id="roomImage" name="gambarKamar">
+                    @if($room->gambarKamar)
+                        <img src="{{ asset('images/kamar/' . $room->gambarKamar) }}" alt="Gambar Kamar" class="img-fluid mt-2"
+                            style="max-height: 150px;">
+                    @endif
                 </div>
-                <button type="submit" class="btn btn-primary">Tambah</button>
-                <a href="{{ url()->previous() }}" class="btn btn-secondary">Kembali</a>
+                <button type="submit" class="btn btn-primary">Perbarui</button>
+                <a href="{{ route('admin.daftarKamar') }}" class="btn btn-secondary">Kembali</a>
             </form>
         </div>
     </div>

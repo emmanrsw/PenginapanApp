@@ -1,5 +1,72 @@
 @extends('layouts.sidebar')
 
+<style>
+    .card {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .card .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #2c3e50;
+    }
+
+    .card .card-body h2 {
+        font-size: 2rem;
+        color: #007bff;
+    }
+
+    .card .card-body p {
+        font-size: 0.875rem;
+        color: #6c757d;
+    }
+
+    .card-header {
+        background-color: #007bff !important;
+        color: #fff;
+        border-bottom: none;
+        border-radius: 12px 12px 0 0;
+        padding: 1rem 1.25rem;
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+
+    .btn-info {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: #fff;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-info:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f9f9f9;
+    }
+
+    .badge {
+        padding: 0.5em 0.75em;
+        font-size: 0.875rem;
+        font-weight: 500;
+        border-radius: 12px;
+    }
+
+    .list-group-item {
+        border: none;
+        padding: 1rem;
+        font-size: 1rem;
+    }
+
+    .list-group-item strong {
+        color: #2c3e50;
+        font-weight: bold;
+    }
+</style>
 @section('content')
 <div class="container-fluid mt-4">
     <div class="row">
@@ -50,7 +117,7 @@
         <div class="col-12">
             <div class="card shadow-sm">
                 <div class="card-header">
-                    <h5>Pesanan Terbaru</h5>
+                    Pesanan Terbaru
                 </div>
                 <div class="card-body">
                     <table class="table table-striped">
@@ -98,7 +165,7 @@
         <div class="col-12">
             <div class="card shadow-sm">
                 <div class="card-header">
-                    <h5>Ulasan Terbaru</h5>
+                    Ulasan Terbaru
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
