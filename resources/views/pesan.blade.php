@@ -4,7 +4,7 @@
 <div class="container my-5">
     <h1 class="text-center mb-4">Form Pemesanan Homestay</h1>
 
-    <form action="{{ route('pesan') }}" method="POST">
+    <form action="#" method="POST">
         @csrf
 
         <div class="card shadow mb-4">

@@ -121,7 +121,7 @@
         <h1 class="display-3 font-weight-bold">Selamat Datang</h1>
         <h1 class="display-3 font-weight-bold">di Homestay Kami</h1>
         <p class="lead mb-4">Tempat yang nyaman dan ramah, ideal untuk liburan atau perjalanan bisnis Anda. Nikmati kenyamanan yang tak terlupakan!</p>
-        <a href="{{ route('pesan') }}" class="btn btn-light btn-lg">Pesan Sekarang</a>
+        <a href="{{ route('reservasi') }}" class="btn btn-light btn-lg">Pesan Sekarang</a>
     </div>
 </section>
 
