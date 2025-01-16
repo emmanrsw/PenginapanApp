@@ -27,9 +27,10 @@
     }
 
     .navbar-brand img {
-        width: 190px;
+        max-width: 190px;
         /* Ukuran gambar logo disesuaikan lebih kecil */
-        height: auto;
+        max-height: auto;
+        object-fit: contain;
     }
 
     .navbar-brand {
@@ -114,7 +115,7 @@
 <body>
     <nav class="navbar navbar-expand-lg">
         <a class="navbar-brand" href="{{ route('home') }}">
-            <img src="image/logo.png" alt="Homestay Kami Logo">
+            <img src="{{ asset('image/logo.png') }}" alt="Logo Homestay Kami">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

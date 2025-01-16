@@ -154,7 +154,7 @@ class kamarController extends Controller
 
 
 
-// tampilannya jadi jelek
+    // tampilannya jadi jelek
     public function showAvailableRooms(Request $request)
     {
         $date = $request->input('date');
