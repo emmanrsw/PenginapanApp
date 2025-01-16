@@ -1,10 +1,95 @@
 @extends('layouts.app')
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
 
+    h1 {
+        font-size: 2rem;
+        color: #333;
+    }
+
+    .form-pemesanan {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .card {
+        border: none;
+        border-radius: 10px;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+        color: #007BFF;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+        box-shadow: none;
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
+    }
+
+    .form-control:focus {
+        border-color: #007BFF;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+    }
+
+    label {
+        font-size: 0.875rem;
+        color: #495057;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .btn-primary {
+        background-color: #007BFF;
+        border: none;
+        border-radius: 5px;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+        .form-pemesanan {
+            padding: 0 1rem;
+        }
+
+        .card-body {
+            padding: 1rem;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+        }
+    }
+</style>
 @section('content')
 <div class="container my-5">
     <h1 class="text-center mb-4">Form Pemesanan Homestay</h1>
 
-    <form action="#" method="POST">
+    <form action="#" method="POST" class="form-pemesanan">
         @csrf
 
         <div class="card shadow mb-4">
@@ -94,3 +179,4 @@
     }
 </script>
 @endsection
+

@@ -95,6 +95,14 @@
                     </select>
                 </div>
                 <div class="mb-3">
+                    <label for="roomLantai" class="form-label">Lantai Kamar</label>
+                    <select class="form-select" id="roomLantai" name="lantaiKamar" required>
+                        <option value="1" {{ $room->lantaiKamar == 1 ? 'selected' : '' }}>Lantai 1</option>
+                        <option value="2" {{ $room->lantaiKamar == 2 ? 'selected' : '' }}>Lantai 2</option>
+                        <option value="3" {{ $room->lantaiKamar == 3 ? 'selected' : '' }}>Lantai 3</option>
+                    </select>
+                </div>
+                <div class="mb-3">
                     <label for="roomCapacity" class="form-label">Kapasitas Kamar</label>
                     <input type="number" class="form-control" id="roomCapacity" name="kapasitasKamar"
                         value="{{ $room->kapasitasKamar }}" required>
@@ -105,15 +113,16 @@
                         <option value="Tersedia" {{ $room->statusKamar == 'Tersedia' ? 'selected' : '' }}>Tersedia
                         </option>
                         <option value="Terisi" {{ $room->statusKamar == 'Terisi' ? 'selected' : '' }}>Terisi</option>
-                        <option value="Perbaikan" {{ $room->statusKamar == 'Perbaikan' ? 'selected' : '' }}>Perbaikan</option>
+                        <option value="Perbaikan" {{ $room->statusKamar == 'Perbaikan' ? 'selected' : '' }}>Perbaikan
+                        </option>
                     </select>
                 </div>
                 <div class="mb-3">
                     <label for="roomImage" class="form-label">Gambar Kamar</label>
                     <input type="file" class="form-control" id="roomImage" name="gambarKamar">
                     @if($room->gambarKamar)
-                        <img src="{{ asset('images/kamar/' . $room->gambarKamar) }}" alt="Gambar Kamar" class="img-fluid mt-2"
-                            style="max-height: 150px;">
+                        <img src="{{ asset('images/kamar/' . $room->gambarKamar) }}" alt="Gambar Kamar"
+                            class="img-fluid mt-2" style="max-height: 150px;">
                     @endif
                 </div>
                 <button type="submit" class="btn btn-primary">Perbarui</button>

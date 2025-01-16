@@ -77,6 +77,7 @@ Route::get('/rooms/available', [kamarController::class, 'showAvailableRooms'])->
 
 // BAGIAN USER
 Route::get('/room', [kamarController::class, 'view'])->name('rooms.view');
+Route::get('/room/filter', [kamarController::class, 'showFilter'])->name('rooms.index');
 // ------------------------------------------------------- SAMPE SITU UDAH BENER
 
 

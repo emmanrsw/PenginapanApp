@@ -85,9 +85,9 @@
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         /* Lebih ringan */
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-        width: 100%;
-        /* Memastikan card mengikuti grid */
-        height: 350px;
+        height: 355px;
+
+        margin-bottom: 20px;
     }
 
     .room-card:hover {
@@ -152,7 +152,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-top: 15px;
+        margin-top: 10px;
     }
 
     .room-book-btn {
@@ -184,6 +184,56 @@
         /* Beri jarak vertikal antar baris */
     }
 
+    /* Flexbox untuk menampilkan kamar secara berdampingan jika lebih dari satu */
+    .room-package-container {
+        width: 780px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: flex-start;
+    }
+
+    .room-package {
+
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .room-package:nth-child(1) {
+        order: 1;
+    }
+
+    .room-package:nth-child(2) {
+        order: 2;
+    }
+
+    .room-package:nth-child(3) {
+        order: 3;
+    }
+
+    .room-package-rooms {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 15px !important;
+    }
+
+    .room-header-package {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        /* Beri sedikit jarak ke bawah */
+    }
+
+    .room-header-package .room-title-package {
+        margin-right: 10px;
+        /* Beri jarak antara judul dan tombol */
+    }
+
     @media (max-width: 768px) {
         .room-cards {
             grid-template-columns: 1fr;
@@ -203,9 +253,10 @@
 
     <!-- Filter Buttons -->
     <div class="filter-buttons">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="reguler">Reguler</button>
-        <button class="filter-btn" data-filter="paket">Paket</button>
+        <a href="{{ route('rooms.index', ['filter' => 'reguler']) }}"
+            class="filter-btn {{ $filter == 'reguler' ? 'active' : '' }}">Reguler</a>
+        <a href="{{ route('rooms.index', ['filter' => 'paket']) }}"
+            class="filter-btn {{ $filter == 'paket' ? 'active' : '' }}">Paket</a>
     </div>
 
     <!-- Layout with Form and Rooms -->
@@ -235,37 +286,207 @@
 
         <!-- Kartu Kamar (Kanan) -->
         <div class="room-cards">
-            @forelse ($rooms as $room)
-                <div class="room-card">
-                    <img src="{{ asset('images/kamar/' . $room->gambarKamar) }}" alt="Room Image" class="room-image">
-                    <div class="room-info">
-                        <div class="room-header">
-                            <h3 class="room-title">{{ $room->namaKamar }}</h3>
-                            <span class="room-status">
-                                @if ($room->statusKamar == 'Tersedia')
-                                    <span class="badge bg-success">Tersedia</span>
-                                @elseif ($room->statusKamar == 'Terisi')
-                                    <span class="badge bg-secondary">Sedang Terisi</span>
-                                @else
-                                    <span class="badge bg-danger">Sedang Perbaikan</span>
-                                @endif
-                            </span>
-                        </div>
-                        <div class="room-details">
-                            <div>🛏️ {{ $room->jmlhKasur }} Kasur</div>
-                            <div>❄️ {{ $room->ac }} AC</div>
-                            <div>🚿 {{ $room->jmlhKamarMandi }} Kamar Mandi</div>
-                            <div>👥 {{ $room->kapasitasKamar }} Orang</div>
-                        </div>
-                        <div class="room-actions">
+            @if(isset($filter) && $filter == 'paket')
+                <div class="room-package-container">
+                    <!-- Grid untuk Pembagian Paket Lantai -->
+
+                    <!-- Paket Lantai 1 -->
+                    <div class="room-package">
+                        <div class="room-header-package">
+                            <h3 class="room-title-package">Paket Lantai 1</h3>
+                            <span style="font-size: 14px; font-weight: bold;">Harga: Rp # / malam</span>
                             <button class="room-book-btn">Pesan</button>
-                            <p class="room-update">Terakhir diperbarui: {{ $room->updated_at->format('d M Y') }}</p>
+                        </div>
+                        <div class="room-package-rooms">
+                            @foreach($rooms['lantai1'] as $room)
+                                <div class="room-card">
+                                    <img src="{{ asset('images/kamar/' . $room->gambarKamar) }}" alt="Room Image"
+                                        class="room-image">
+                                    <div class="room-info">
+                                        <div class="room-header">
+                                            <h3 class="room-title">{{ $room->namaKamar }}</h3>
+                                            <span class="room-status">
+                                                @if ($room->statusKamar == 'Tersedia')
+                                                    <span class="badge bg-success">Tersedia</span>
+                                                @elseif ($room->statusKamar == 'Terisi')
+                                                    <span class="badge bg-secondary">Sedang Terisi</span>
+                                                @else
+                                                    <span class="badge bg-danger">Sedang Perbaikan</span>
+                                                @endif
+                                            </span>
+                                        </div>
+                                        <div class="room-details">
+                                            <div>🛏️ {{ $room->jmlhKasur }} Kasur</div>
+                                            <div>❄️ {{ $room->ac_display }} AC</div>
+                                            <div>🚿 {{ $room->jmlhKamarMandi }} Kamar Mandi</div>
+                                            <div>👥 Maks {{ $room->kapasitasKamar }} Orang</div>
+                                            <div>📍 Lantai {{ $room->lantaiKamar }}</div>
+                                        </div>
+                                        <div class="room-actions">
+                                            <p class="room-update">Terakhir diperbarui: {{ $room->updated_at->format('d M Y') }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <!-- Paket Lantai 2 -->
+                    <div class="room-package">
+                        <div class="room-header-package">
+                            <h3 class="room-title-package">Paket Lantai 2</h3>
+                            <span style="font-size: 14px; font-weight: bold;">Harga: Rp # / malam</span>
+                            <button class="room-book-btn">Pesan</button>
+                        </div>
+                        <div class="room-package-rooms">
+                            @foreach($rooms['lantai2'] as $room)
+                                <div class="room-card">
+                                    <img src="{{ asset('images/kamar/' . $room->gambarKamar) }}" alt="Room Image"
+                                        class="room-image">
+                                    <div class="room-info">
+                                        <div class="room-header">
+                                            <h3 class="room-title">{{ $room->namaKamar }}</h3>
+                                            <span class="room-status">
+                                                @if ($room->statusKamar == 'Tersedia')
+                                                    <span class="badge bg-success">Tersedia</span>
+                                                @elseif ($room->statusKamar == 'Terisi')
+                                                    <span class="badge bg-secondary">Sedang Terisi</span>
+                                                @else
+                                                    <span class="badge bg-danger">Sedang Perbaikan</span>
+                                                @endif
+                                            </span>
+                                        </div>
+                                        <div class="room-details">
+                                            <div>🛏️ {{ $room->jmlhKasur }} Kasur</div>
+                                            <div>❄️ {{ $room->ac_display }} AC</div>
+                                            <div>🚿 {{ $room->jmlhKamarMandi }} Kamar Mandi</div>
+                                            <div>👥 Maks {{ $room->kapasitasKamar }} Orang</div>
+                                            <div>📍 Lantai {{ $room->lantaiKamar }}</div>
+                                        </div>
+                                        <div class="room-actions">
+                                            <p class="room-update">Terakhir diperbarui: {{ $room->updated_at->format('d M Y') }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <!-- Paket Lantai 3 -->
+                    <div class="room-package">
+                        <div class="room-header-package">
+                            <h3 class="room-title-package">Paket Lantai 3</h3>
+                            <span style="font-size: 14px; font-weight: bold;">Harga: Rp # / malam</span>
+                            <button class="room-book-btn">Pesan</button>
+                        </div>
+                        <div class="room-package-rooms">
+                            @foreach($rooms['lantai3'] as $room)
+                                <div class="room-card">
+                                    <img src="{{ asset('images/kamar/' . $room->gambarKamar) }}" alt="Room Image"
+                                        class="room-image">
+                                    <div class="room-info">
+                                        <div class="room-header">
+                                            <h3 class="room-title">{{ $room->namaKamar }}</h3>
+                                            <span class="room-status">
+                                                @if ($room->statusKamar == 'Tersedia')
+                                                    <span class="badge bg-success">Tersedia</span>
+                                                @elseif ($room->statusKamar == 'Terisi')
+                                                    <span class="badge bg-secondary">Sedang Terisi</span>
+                                                @else
+                                                    <span class="badge bg-danger">Sedang Perbaikan</span>
+                                                @endif
+                                            </span>
+                                        </div>
+                                        <div class="room-details">
+                                            <div>🛏️ {{ $room->jmlhKasur }} Kasur</div>
+                                            <div>❄️ {{ $room->ac_display }} AC</div>
+                                            <div>🚿 {{ $room->jmlhKamarMandi }} Kamar Mandi</div>
+                                            <div>👥 Maks {{ $room->kapasitasKamar }} Orang</div>
+                                            <div>📍 Lantai {{ $room->lantaiKamar }}</div>
+                                        </div>
+                                        <div class="room-actions">
+                                            <p class="room-update">Terakhir diperbarui: {{ $room->updated_at->format('d M Y') }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
-            @empty
-                <p>No rooms available for the selected date.</p>
-            @endforelse
+            @elseif(isset($filter) && $filter == 'reguler')
+                <!-- Kamar Reguler -->
+                @foreach($rooms as $room)
+                    <div class="room-card">
+                        <img src="{{ asset('images/kamar/' . $room->gambarKamar) }}" alt="Room Image" class="room-image">
+                        <div class="room-info">
+                            <div class="room-header">
+                                <h3 class="room-title">{{ $room->namaKamar }}</h3>
+                                <span class="room-status">
+                                    @if ($room->statusKamar == 'Tersedia')
+                                        <span class="badge bg-success">Tersedia</span>
+                                    @elseif ($room->statusKamar == 'Terisi')
+                                        <span class="badge bg-secondary">Sedang Terisi</span>
+                                    @else
+                                        <span class="badge bg-danger">Sedang Perbaikan</span>
+                                    @endif
+                                </span>
+                            </div>
+                            <div class="room-details">
+                                <div>🛏️ {{ $room->jmlhKasur }} Kasur</div>
+                                <div>❄️ {{ $room->ac_display }} AC</div>
+                                <div>🚿 {{ $room->jmlhKamarMandi }} Kamar Mandi</div>
+                                <div>👥 Maks {{ $room->kapasitasKamar }} Orang</div>
+                                <div>📍 Lantai {{ $room->lantaiKamar }}</div>
+                            </div>
+                            <div class="room-price" style="font-size: 12px; font-weight: bold; margin-top: 10px;">
+                                Harga: Rp{{ number_format($room->hargaKamar, 0, ',', '.') }} / malam
+                            </div>
+                            <div class="room-actions">
+                                <button class="room-book-btn">Pesan</button>
+                                <p class="room-update">Terakhir diperbarui: {{ $room->updated_at->format('d M Y') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @else
+                <!-- Semua Kamar (All) -->
+                @foreach($rooms as $room)
+                    <div class="room-card">
+                        <img src="{{ asset('images/kamar/' . $room->gambarKamar) }}" alt="Room Image" class="room-image">
+                        <div class="room-info">
+                            <div class="room-header">
+                                <h3 class="room-title">{{ $room->namaKamar }}</h3>
+                                <span class="room-status">
+                                    @if ($room->statusKamar == 'Tersedia')
+                                        <span class="badge bg-success">Tersedia</span>
+                                    @elseif ($room->statusKamar == 'Terisi')
+                                        <span class="badge bg-secondary">Sedang Terisi</span>
+                                    @else
+                                        <span class="badge bg-danger">Sedang Perbaikan</span>
+                                    @endif
+                                </span>
+                            </div>
+                            <div class="room-details">
+                                <div>🛏️ {{ $room->jmlhKasur }} Kasur</div>
+                                <div>❄️ {{ $room->ac_display }} AC</div>
+                                <div>🚿 {{ $room->jmlhKamarMandi }} Kamar Mandi</div>
+                                <div>👥 Maks {{ $room->kapasitasKamar }} Orang</div>
+                                <div>📍 Lantai {{ $room->lantaiKamar }}</div>
+                            </div>
+                            <div class="room-price" style="font-size: 12px; font-weight: bold; margin-top: 10px;">
+                                Harga: Rp{{ number_format($room->hargaKamar, 0, ',', '.') }} / malam
+                            </div>
+                            <div class="room-actions">
+                                <button class="room-book-btn">Pesan</button>
+                                <p class="room-update">Terakhir diperbarui: {{ $room->updated_at->format('d M Y') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
         </div>
     </div>
 </div>

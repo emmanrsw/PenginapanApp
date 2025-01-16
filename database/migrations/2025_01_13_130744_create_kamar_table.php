@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('jmlhKamarMandi'); // Jumlah kamar mandi
             $table->boolean('ac'); // Tersedia AC atau tidak (true/false)
             $table->decimal('hargaKamar', 10, 2); // Harga kamar
+            $table->integer('lantaiKamar'); // Harga kamar
             $table->enum('statusKamar', ['Tersedia', 'Terisi', 'Perbaikan'])->default('Tersedia'); // Status kamar
             $table->integer('kapasitasKamar'); // Kapasitas kamar
             $table->timestamps(); // Kolom created_at dan updated_at

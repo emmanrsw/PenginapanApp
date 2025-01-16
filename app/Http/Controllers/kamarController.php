@@ -32,6 +32,7 @@ class kamarController extends Controller
             'jmlhKamarMandi' => 'required|integer',
             'ac' => 'required|boolean',
             'hargaKamar' => 'required|numeric',
+            'lantaiKamar' => 'required|integer',
             'statusKamar' => 'required|string',
             'kapasitasKamar' => 'required|integer',
         ]);
@@ -51,6 +52,7 @@ class kamarController extends Controller
             'jmlhKamarMandi' => $request->jmlhKamarMandi,
             'ac' => $request->ac,
             'hargaKamar' => $request->hargaKamar,
+            'lantaiKamar' => $request->lantaiKamar,
             'statusKamar' => $request->statusKamar,
             'kapasitasKamar' => $request->kapasitasKamar,
         ]);
@@ -144,17 +146,23 @@ class kamarController extends Controller
     // }
 
     // =============================== USER ===============================
-    public function view (){
+    public function view()
+    {
         // Ambil semua kamar dari database
         $rooms = Kamar::all();
 
-        // Kirim data kamar ke view 'listkamar'
-        return view('listKamar', compact('rooms'));
+        // Tambahkan informasi AC yang lebih mudah dipahami
+        foreach ($rooms as $room) {
+            $room->ac_display = $room->ac ? 'Ada' : 'Tidak Ada';
+        }
+
+        // Tentukan nilai default filter jika tidak ada filter
+        $filter = 'reguler';
+
+        // Kirim data kamar ke view 'listkamar' dengan filter default 'all'
+        return view('listKamar', compact('rooms', 'filter'));
     }
 
-
-
-    // tampilannya jadi jelek
     public function showAvailableRooms(Request $request)
     {
         $date = $request->input('date');
@@ -164,5 +172,35 @@ class kamarController extends Controller
             'rooms' => $availableRooms,
             'selectedDate' => $date,
         ]);
+    }
+    public function showFilter(Request $request)
+    {
+        // Ambil filter dari query parameter, default 'all'
+        $filter = $request->get('filter', 'reguler'); // Jika tidak ada filter, default 'all'
+
+        // Ambil data kamar berdasarkan filter
+        $rooms = $this->getRoomsBasedOnFilter($filter);
+
+        // Kirim data ke view
+        return view('listKamar', compact('rooms', 'filter'));
+    }
+
+    // Method untuk mengambil data kamar berdasarkan filter
+    private function getRoomsBasedOnFilter($filter)
+    {
+        if ($filter == 'paket') {
+            // Ambil kamar berdasarkan paket lantai (lantai 1, 2, 3)
+            return [
+                'lantai1' => Kamar::where('lantaiKamar', 1)->get(),
+                'lantai2' => Kamar::where('lantaiKamar', 2)->get(),
+                'lantai3' => Kamar::where('lantaiKamar', 3)->get(),
+            ];
+        } elseif ($filter == 'reguler') {
+            // Ambil semua kamar reguler
+            return Kamar::where('statusKamar', 'Tersedia')->get(); // Menampilkan kamar yang statusnya 'Tersedia'
+        }
+
+        // Default: tampilkan semua kamar
+        return Kamar::all();
     }
 }

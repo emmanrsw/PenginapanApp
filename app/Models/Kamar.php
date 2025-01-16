@@ -25,6 +25,7 @@ class Kamar extends Model
         'jmlhKamarMandi',
         'ac',
         'hargaKamar',
+        'lantaiKamar',
         'statusKamar',
         'kapasitasKamar',
     ];

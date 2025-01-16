@@ -43,7 +43,8 @@
         font-weight: bold;
     }
 
-    .form-control, .form-select {
+    .form-control,
+    .form-select {
         border-radius: 10px;
     }
 
@@ -83,8 +84,18 @@
                 <div class="mb-3">
                     <label for="roomAC" class="form-label">AC</label>
                     <select class="form-select" id="roomAC" name="ac" required>
+                        <option value="" selected disabled>Pilih AC</option>
                         <option value="1">Ada</option>
                         <option value="0">Tidak Ada</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="roomLantai" class="form-label">Keberadaan kamar</label>
+                    <select class="form-select" id="roomLantai" name="lantaiKamar" required>
+                        <option value="" selected disabled>Pilih Lantai</option>
+                        <option value="1">Lantai 1</option>
+                        <option value="2">Lantai 2</option>
+                        <option value="3">Lantai 3</option>
                     </select>
                 </div>
                 <div class="mb-3">
@@ -94,6 +105,7 @@
                 <div class="mb-3">
                     <label for="roomStatus" class="form-label">Status Kamar</label>
                     <select class="form-select" id="roomStatus" name="statusKamar" required>
+                        <option value="" selected disabled>Pilih Status</option>
                         <option value="Tersedia">Tersedia</option>
                         <option value="Terisi">Terisi</option>
                         <option value="Perbaikan">Perbaikan</option>
