@@ -445,42 +445,11 @@
                                 Harga: Rp{{ number_format($room->hargaKamar, 0, ',', '.') }} / malam
                             </div>
                             <div class="room-actions">
-                                <button class="room-book-btn">Pesan</button>
-                                <p class="room-update">Terakhir diperbarui: {{ $room->updated_at->format('d M Y') }}</p>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            @else
-                <!-- Semua Kamar (All) -->
-                @foreach($rooms as $room)
-                    <div class="room-card">
-                        <img src="{{ asset('images/kamar/' . $room->gambarKamar) }}" alt="Room Image" class="room-image">
-                        <div class="room-info">
-                            <div class="room-header">
-                                <h3 class="room-title">{{ $room->namaKamar }}</h3>
-                                <span class="room-status">
-                                    @if ($room->statusKamar == 'Tersedia')
-                                        <span class="badge bg-success">Tersedia</span>
-                                    @elseif ($room->statusKamar == 'Terisi')
-                                        <span class="badge bg-secondary">Sedang Terisi</span>
-                                    @else
-                                        <span class="badge bg-danger">Sedang Perbaikan</span>
-                                    @endif
-                                </span>
-                            </div>
-                            <div class="room-details">
-                                <div>🛏️ {{ $room->jmlhKasur }} Kasur</div>
-                                <div>❄️ {{ $room->ac_display }} AC</div>
-                                <div>🚿 {{ $room->jmlhKamarMandi }} Kamar Mandi</div>
-                                <div>👥 Maks {{ $room->kapasitasKamar }} Orang</div>
-                                <div>📍 Lantai {{ $room->lantaiKamar }}</div>
-                            </div>
-                            <div class="room-price" style="font-size: 12px; font-weight: bold; margin-top: 10px;">
-                                Harga: Rp{{ number_format($room->hargaKamar, 0, ',', '.') }} / malam
-                            </div>
-                            <div class="room-actions">
-                                <button class="room-book-btn">Pesan</button>
+                                <form action="{{ route('reservasi',['idKamar' => $room->idKamar]) }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="selectedItems" id="selectedItems">
+                                    <button type="submit" class="room-book-btn">Pesan</button>
+                                </form>
                                 <p class="room-update">Terakhir diperbarui: {{ $room->updated_at->format('d M Y') }}</p>
                             </div>
                         </div>

@@ -95,4 +95,5 @@ Route::get('/contact', [karyawanController::class, 'index'])->name('contact');
 
 use App\Http\Controllers\formController;
 // Route untuk menampilkan form pemesanan
-Route::get('/reservasi', [formController::class, 'view'])->name('reservasi');
+// Route::get('/reservasi', [formController::class, 'view'])->name('reservasi');
+Route::post('/reservasi/{idKamar}', [formController::class, 'store'])->name('reservasi');

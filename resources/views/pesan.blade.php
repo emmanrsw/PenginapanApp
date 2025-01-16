@@ -111,7 +111,7 @@
                     <input type="date" class="form-control" id="check_out" name="check_out" required>
                 </div>
                 <div class="form-group mt-3">
-                    <label for="jumlah_hari">Jumlah Hari/Malam</label>
+                    <label for="jumlah_hari">Jumlah Malam</label>
                     <input type="text" class="form-control" id="jumlah_hari" name="jumlah_hari" readonly>
                 </div>
             </div>
@@ -119,19 +119,22 @@
 
         <div class="card shadow mb-4">
             <div class="card-body">
-                <h3 class="card-title">Pilihan Kamar</h3>
-                <select class="form-control" name="tipe_kamar" required>
-                    <option value="per_kamar">Per Kamar</option>
-                    <option value="per_lantai">Per Lantai</option>
-                    <option value="full">Full</option>
-                </select>
+                <h3 class="card-title">Jumlah Orang</h3>
+                <input type="number" class="form-control" name="jumlah_orang" placeholder="Jumlah orang" required>
             </div>
         </div>
 
         <div class="card shadow mb-4">
             <div class="card-body">
-                <h3 class="card-title">Jumlah Orang</h3>
-                <input type="number" class="form-control" name="jumlah_orang" placeholder="Jumlah orang" required>
+                <h3 class="card-title">Kamar yang dipilih</h3>
+                <input type="text" class="form-control" value={{ $kamar->namaKamar }} readonly>
+            </div>
+        </div>
+
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <h3 class="card-title">Detail Harga</h3>
+                <input type="text" class="form-control" id="total_harga" readonly value="Rp 0">
             </div>
         </div>
 
@@ -159,7 +162,6 @@
 </div>
 
 <script>
-    // Script untuk menghitung jumlah hari/malam
     document.getElementById('check_in').addEventListener('change', hitungDurasi);
     document.getElementById('check_out').addEventListener('change', hitungDurasi);
 
@@ -171,12 +173,25 @@
             var timeDiff = checkOut - checkIn;
             var days = timeDiff / (1000 * 3600 * 24); // Menghitung jumlah hari
             if (days > 0) {
-                document.getElementById('jumlah_hari').value = days + ' Hari/Malam';
+                document.getElementById('jumlah_hari').value = days + ' Malam';
+                updateHarga(days); // Panggil update harga setelah jumlah hari dihitung
             } else {
                 document.getElementById('jumlah_hari').value = 'Tanggal check-out harus setelah check-in';
+                document.getElementById('total_harga').value = 'Rp0'; // Reset total harga
             }
+        }
+    }
+
+    function updateHarga(jumlahHari) {
+        // Ambil harga per malam dari elemen input harga kamar
+        const hargaPerMalam = parseInt('{{ $kamar->hargaKamar }}') || 0;
+
+        if (jumlahHari > 0 && hargaPerMalam > 0) {
+            const totalHarga = hargaPerMalam * jumlahHari;
+            document.getElementById('total_harga').value = 'Rp' + new Intl.NumberFormat('id-ID').format(totalHarga);
+        } else {
+            document.getElementById('total_harga').value = 'Rp0';
         }
     }
 </script>
 @endsection
-
